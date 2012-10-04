@@ -2,7 +2,7 @@
 
 1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.1.x]]
 2. Install [[https://github.com/technomancy/leiningen][leiningen]]
-3. Startup the virtualbox webservice by invoking: sh bootstrap.sh in
+3. Startup the virtualbox webservice by invoking: sh bootstrap.sh
 4. To start a new VM and begin installing couchdb on it, in a new
    terminal invoke:
 
