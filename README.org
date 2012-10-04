@@ -7,13 +7,13 @@
    terminal invoke:
 
 #+BEGIN_SRC sh
-  lein pallet -P virtualbox converge cloudmill.groups.couchdb 1
+  lein pallet -P virtualbox converge cloudmill.groups.couchdb/couchdb 1
 #+END_SRC
 
 5. To destroy the VM invoke:
 
 #+BEGIN_SRC sh
-  lein pallet -P virtualbox converge cloudmill.groups.couchdb 0
+  lein pallet -P virtualbox converge cloudmill.groups.couchdb/couchdb 0
 #+END_SRC
 
 * Caveats
@@ -34,7 +34,7 @@ limitation.
 The disk image they provide for us is immutable. That means that if
 the user "destroys" the VM instance, they'll have to completely
 rebuild CouchDB next time they turn on the instance. This takes about
-16.5 minutes on my macbook pro.
+16 minutes on my macbook pro.
 
 There are two solutions for this. 
 
