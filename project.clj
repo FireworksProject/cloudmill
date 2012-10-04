@@ -1,8 +1,10 @@
 (defproject cloudmill "0.1.0-SNAPSHOT"
   :description "FIXME Pallet project for cloudmill"
-  :dependencies [[org.clojure/clojure "1.3.0"]
+  :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.cloudhoist/pallet "0.7.2"]
                  [org.cloudhoist/pallet-jclouds "1.4.2"]
+                 [org.cloudhoist/pallet-vmfest "0.2.0"]
+
                  ;; To get started we include all jclouds compute providers.
                  ;; You may wish to replace this with the specific jclouds
                  ;; providers you use, to reduce dependency sizes.
@@ -12,8 +14,13 @@
                   ;; the declared version is old and can overrule the
                   ;; resolved version
                   :exclusions [org.slf4j/slf4j-api]]
+
                  [org.jclouds.driver/jclouds-sshj "1.4.2"]
-                 [ch.qos.logback/logback-classic "1.0.0"]]
+                 [ch.qos.logback/logback-classic "1.0.0"]
+
+                 ;; Crates
+                 [org.cloudhoist/git "0.7.0-beta.1"]]
+  
   :dev-dependencies [[org.cloudhoist/pallet
                       "0.7.2" :type "test-jar"]
                      [org.cloudhoist/pallet-lein "0.5.2"]]
