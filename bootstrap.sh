@@ -36,10 +36,18 @@ if ! [ -e $PALLET_CONF_FILE ]; then
     cp $DEFAULT_PALLET_CONF $PALLET_CONF_FILE  || warn "Couldn't copy $DEFAULT_PALLET_CONF to $PALLET_CONF_FILE"
 fi
 
+# FIXME:
+# Currently pallet uses ssh-agent to discover which key to use for
+# shelling into the nodes it creates. You will not be able to shell in
+# to the new nodes if you don't have a key registered with ssh-agent,
+# and therefore pallet will not be able to set up the nodes you want.
+# This code ensures there is a key registered. I'm not sure if this is
+# the best way to do this. Please feel free to fix this.
 if ! [ -e ~/.ssh/id_rsa ]; then
     ssh-keygen -t rsa
 fi
-
 ssh-add -K ~/.ssh/id_rsa || fail "Could not add ssh key to ssh-agent"
+
+
 vboxwebsrv -t0 || fail "Failure invoking: vboxwebsrv -t0"
 VBoxManage setproperty null || fail "Failure invoking: VBoxManage setproperty websrvauthlibrary null"

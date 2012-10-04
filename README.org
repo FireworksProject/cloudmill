@@ -21,6 +21,9 @@
   lein pallet -P virtualbox converge cloudmill.groups.couchdb/couchdb 0
 #+END_SRC
 
+NOTE: I will make the command-line interface for cloudmill easier to
+use in the future
+
 * Caveats
 
 ** Linux Distribution
@@ -39,15 +42,17 @@ limitation.
 The disk image they provide for us is immutable. That means that if
 the user "destroys" the VM instance, they'll have to completely
 rebuild CouchDB next time they turn on the instance. This takes about
-16 minutes on my macbook pro.
+16 minutes on my macbook pro. So, this is painful if you want to set
+up a dev environment quickly.
 
 There are two solutions for this. 
 
-1. We can create our own immutable disk image based on their debian
-   image.
+1. We can create our own immutable disk image, based on their debian
+   image, that has CouchDB installed.
 2. We can share a folder from the host OS into the VM and make all our
    changes in the shared folder. This way changes are stored on the
    host machine durably. These changes can be used across multiple VM
    lifetimes by simply re-mounting the shared folder.
 
 At the moment neither of these solutions are implemented.
+
