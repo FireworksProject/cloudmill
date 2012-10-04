@@ -1,0 +1,48 @@
+* Usage
+
+1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.1.x]]
+2. Install [[https://github.com/technomancy/leiningen][leiningen]]
+3. Startup the virtualbox webservice by invoking: sh bootstrap.sh in
+4. To start a new VM and begin installing couchdb on it, in a new
+   terminal invoke:
+
+#+BEGIN_SRC sh
+  lein pallet -P virtualbox converge cloudmill.groups.couchdb 1
+#+END_SRC
+
+5. To destroy the VM invoke:
+
+#+BEGIN_SRC sh
+  lein pallet -P virtualbox converge cloudmill.groups.couchdb 0
+#+END_SRC
+
+* Caveats
+
+** Linux Distribution
+
+Pallet uses a library called [[https://github.com/tbatchelli/vmfest][vmfest]] to manage VirtualBox VMs.
+Currently, there is a limitation in vmfest that prevents us from using
+whatever image we want. At the moment, we have to use [[https://s3.amazonaws.com/vmfest-images/debian-6.0.2.1-64bit-v0.3.vdi.gz][their provided
+debian image]]. 
+
+This doesn't cause us any trouble that I know of at them moment, and
+they're working on a fix for it. So, I'm not worried about this
+limitation.
+
+** Immutable Disk Image
+
+The disk image they provide for us is immutable. That means that if
+the user "destroys" the VM instance, they'll have to completely
+rebuild CouchDB next time they turn on the instance. This takes about
+16.5 minutes on my macbook pro.
+
+There are two solutions for this. 
+
+1. We can create our own immutable disk image based on their debian
+   image.
+2. We can share a folder from the host OS into the VM and make all our
+   changes in the shared folder. This way changes are stored on the
+   host machine durably. These changes can be used across multiple VM
+   lifetimes by simply re-mounting the shared folder.
+
+At the moment neither of these solutions are implemented.
