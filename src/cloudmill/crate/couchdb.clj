@@ -23,12 +23,12 @@
 
 (defn init-script-path
   [session]
-  (case (debug (os-family session))
+  (case (os-family session)
     :debian "/etc/init.d/couchdb"))
 
 (defn update-rc
   [session]
-  (case (debug (os-family session))
+  (case (os-family session)
     :debian '(update-rc.d couchdb defaults)))
 
 (defn install

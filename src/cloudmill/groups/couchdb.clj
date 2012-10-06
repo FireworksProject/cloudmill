@@ -1,7 +1,7 @@
 (ns cloudmill.groups.couchdb
-  "Node defintions for cloudmill"
+  "Node defintions for couchdb"
   (:use
-   [pallet.core :only [group-spec server-spec node-spec]]
+   [pallet.core :only [group-spec server-spec node-spec converge]]
    [pallet.crate.automated-admin-user :only [automated-admin-user]]
    [pallet.phase :only [phase-fn]]
    [pallet.action
@@ -18,14 +18,14 @@
    :hardware {:min-cores 1 :min-ram 600}))
 
 (def
-  ^{:doc "Defines the type of node cloudmill will run on"}
+  ^{:doc "Defines the type of node couchbd will run on"}
   base-server
   (server-spec
    :phases
    {:bootstrap (phase-fn (automated-admin-user))}))
 
 (def
-  ^{:doc "Define a server spec for cloudmill"}
+  ^{:doc "Define a server spec for couchdb"}
   couchdb-server
   (server-spec
    :phases
@@ -38,6 +38,14 @@
   ^{:doc "Defines a group spec that can be passed to converge or lift."}
   couchdb
   (group-spec
-   "cloudmill"
+   "couchdb"
    :extends [base-server couchdb-server]
    :node-spec default-node-spec))
+
+(defn create
+  [compute]
+  (converge couchdb :compute compute))
+
+(defn destroy
+  [compute]
+  (converge {couchdb 0} :compute compute))

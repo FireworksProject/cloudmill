@@ -19,7 +19,7 @@
        "Checkout FireworksProject/web_server.git"
 
        (rm -rf ~(repo-directory session))
-       (git clone ~(repo-url session) ~(repo-directory session)))))
+       (git clone ~(repo-url session) ~(repo-directory session) "&> /dev/null"))))
 
 (defn update
   [session]
@@ -39,4 +39,4 @@
        
        (cd ~(repo-directory session))
        (bin/setup_couchdb "&> /dev/null"))
-      (assoc session :couchdb-directory (couchdb-directory session))))
+      (assoc :couchdb-directory (couchdb-directory session))))
