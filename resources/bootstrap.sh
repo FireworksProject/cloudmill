@@ -31,7 +31,7 @@ ensure_available "lein"       "Ensure you have leiningen installed: https://gith
 ensure_available "vboxwebsrv" "Ensure you have installed VirtualBox"
 ensure_available "VBoxManage" "Ensure you have installed VirtualBox"
 
-if [ ! -f "$PALLET_CONF_FILE" ]; then
+if ! [ -f "$PALLET_CONF_FILE" ]; then
     ensure_dir `dirname $PALLET_CONF_FILE`
     cp $DEFAULT_PALLET_CONF $PALLET_CONF_FILE  || warn "Couldn't copy $DEFAULT_PALLET_CONF to $PALLET_CONF_FILE"
 fi
