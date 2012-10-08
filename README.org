@@ -2,7 +2,12 @@
 
 1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.1.x]]
 2. Install [[https://github.com/technomancy/leiningen][leiningen]]
-3. Startup the virtualbox webservice by invoking: sh bootstrap.sh
+3. Startup the virtualbox webservice by invoking: 
+
+#+BEGIN_SRC sh
+  sh bootstrap.sh
+#+END_SRC
+
 4. Add the vmfest image. In a new terminal invoke:
 
 #+BEGIN_SRC sh
