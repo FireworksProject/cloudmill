@@ -5,22 +5,22 @@ cd `dirname $0`
 PALLET_CONF_FILE="$HOME/.pallet/config.clj"
 DEFAULT_PALLET_CONF="./resources/pallet-config.clj"
 
-function fail {
+fail () {
     echo "$@" >&2
     exit 1
 }
 
-function warn {
+warn () {
     echo "$@" >&2
 }
 
-function ensure_dir {
+ensure_dir () {
     if ! [ -d "$1" ]; then
         mkdir -p -- "$1" || fail "couldn't create $1"
     fi
 }
 
-function ensure_available {
+ensure_available () {
     if [ -z `which $1` ]; then
         fail "ERROR:\tCould not find $1 on your path.\n\t$2"
         exit 1
@@ -46,7 +46,9 @@ fi
 if ! [ -f "$HOME/.ssh/id_rsa" ]; then
     ssh-keygen -t rsa
 fi
-ssh-add -K "$HOME/.ssh/id_rsa" || fail "Could not add ssh key to ssh-agent"
+# The -K switch is not available on Ubuntu 10.04
+# ssh-add -K "$HOME/.ssh/id_rsa" || fail "Could not add ssh key to ssh-agent"
+ssh-add "$HOME/.ssh/id_rsa" || fail "Could not add ssh key to ssh-agent"
 
 
 vboxwebsrv -t0 || fail "Failure invoking: vboxwebsrv -t0"
