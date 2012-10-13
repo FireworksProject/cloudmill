@@ -85,9 +85,9 @@ specification.
 # Service Spec
 --------------
 
-A Service is a concrete software package that provides a given role.
-It is installing a Service on some Node that enables the Node to play
-a given Role in the cluster. For example, if a Node can play the
+A Service is a concrete software package that provides a given Role.
+By installing a Service on some Node you enable the Node to play a
+given Role in the cluster. For example, if a Node can play the
 :web-server role, if it has the :apache2 service installed on it.
 
 
@@ -114,7 +114,8 @@ For example:
  :provides :web-app
  :installer #cloudmill/github "https://github.com/foo/web-app.git"
  :configurer #cloudmill/stevedore (sed {"payment-provider-mock"
-                                        "amazon-payments"})
+                                        "amazon-payments"
+                                        "/path/to/config/file"})
  :depends #{:apache2 :mod_php :couchdb}}
  
 {:name :couchdb
@@ -131,3 +132,25 @@ extended by third-parties as well.
 ===============
 
 This is basically going to be a map that can be handed to pallet.core/node-spec.
+
+# Core Abstractions
+===================
+
+## Cluster Specification Abstractions
+
+* Role
+* Connection
+
+## Service Abstractions
+
+* installer
+* configurer
+* startable
+
+
+## Cluster Job Abstrations
+
+These abstractions are involved with the process of setting up,
+tearing down, or otherwise changing the configuration of a cluster.
+
+* I don't have anything here yet.
