@@ -38,10 +38,10 @@ Specifies how roles are connected.
 
 Example:
 
-  :web-app --> :db
-  :web-app <--> :web-server
-  :web-server --> :monitoring
-  :db  --> :monitoring
+    :web-app --> :db
+    :web-app <--> :web-server
+    :web-server --> :monitoring
+    :db  --> :monitoring
 
 The above is how I would like to write the connectivity constraints.
 Here is how it would look like in pure clojure data:
@@ -61,7 +61,7 @@ Specifies names for the particular machines configurations to be used.
 
 Example:
 
-``clojure
+```clojure
 :large
 :medium
 :small
