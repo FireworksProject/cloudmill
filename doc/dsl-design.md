@@ -1,5 +1,5 @@
 # Cluster Spec
-==============
+--------------
 
 This specifies the constraints the given cluster must satisfy.
 
@@ -17,8 +17,7 @@ Example:
          :monitoring :small}}
 ```
 
-Roles
------
+## Roles
 
 Specify names for given roles that machines can play in the cluster. 
 
@@ -31,8 +30,7 @@ Example:
 :monitoring
 ```
 
-Connectivity
-------------
+## Connectivity
 
 Specifies how roles are connected.
 
@@ -54,8 +52,7 @@ Here is how it would look like in pure clojure data:
   [:db :monitoring]}
 ```
 
-Hardware
---------
+## Hardware
 
 Specifies names for the particular machines configurations to be used.
 
@@ -67,8 +64,7 @@ Example:
 :small
 ```
 
-Nodes
------
+## Nodes
 
 Pair roles to the hardware they require.
 
@@ -87,7 +83,7 @@ These capabilities will be defined in detail by the hardware
 specification.
 
 # Service Spec
-==============
+--------------
 
 A Service is a concrete software package that provides a given role.
 It is installing a Service on some Node that enables the Node to play
@@ -111,7 +107,7 @@ For example:
 ```clojure
 {:name :apache2
  :provides :web-server
- :installer #cloudmill/packager "apache"
+ :installer #cloudmill/packager "apache" ; use apt-get or yum
  :configurer #cloudmill/remote-file "http://foo.com/bar.sh"}
  
 {:name :customer-foo-web-app
@@ -124,13 +120,14 @@ For example:
 {:name :couchdb
  :provides :db
  :installer #cloudmill/chef-solo "http://foo.com/path/to/recipe"
- :configurer :installer ; configuration was provided by installer}
+ :configurer :installer ; configuration was provided by installer
+ }
  ```
 
 Cloudmill will provide various installers and configurers. This can be
 extended by third-parties as well.
 
 # Hardware Spec
-===============
+---------------
 
 This is basically going to be a map that can be handed to pallet.core/node-spec.
