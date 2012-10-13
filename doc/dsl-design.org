@@ -1,0 +1,69 @@
+* Cluster Spec
+
+This specifies the constraints the given cluster must satisfy.
+
+Example:
+
+#+BEGIN_SRC clojure
+{:roles #{:web-app :web-server :db :monitoring}
+ :connectivity #{[:web-app :db] 
+                 [:web-app :web-server]
+                 [:web-server :web-app]
+                 [:web-server :monitoring]
+                 [:db         :monitoring]}
+ :hardware #{:large :medium :small}
+ :nodes {[:web-server :web-app :db] :meduim
+         :monitoring :small}}
+#+END_SRC
+
+** Roles
+
+Specify names for given roles that machines can play in the cluster. 
+
+Example:
+
+:web-server
+:web-app
+:db
+:monitoring
+
+** Connectivity
+
+Specifies how roles are connected.
+
+Example:
+
+:web-app --> :db
+:web-app <--> :web-server
+:web-server --> :monitoring
+:db  --> :monitoring
+
+The above is how I would like to write the connectivity constraints.
+Here is how it would look like in pure clojure data:
+
+#+BEGIN_SRC clojure
+#{[:web-app :db]
+  [:web-app :web-server]
+  [:web-server :web-app]
+  [:web-server :monitoring]
+  [:db :monitoring]}
+#+END_SRC
+
+** Hardware
+
+Specifies names for the particular machines configurations to be used.
+
+Example:
+
+:large
+:medium
+:small
+
+** Nodes
+
+Pair roles to the hardware they require.
+
+Example:
+
+{[:web-server :web-app :db] :medium, :monitoring :small}
+
