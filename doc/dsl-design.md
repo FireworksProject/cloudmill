@@ -153,4 +153,19 @@ This is basically going to be a map that can be handed to pallet.core/node-spec.
 These abstractions are involved with the process of setting up,
 tearing down, or otherwise changing the configuration of a cluster.
 
-* I don't have anything here yet.
+* environment
+* configuration
+
+### A Sketch of the algorithm
+
+1. Read the cluster spec
+2. Verify Cloud Provider(s)
+3. Load configurers
+4. Query configurers and environment for config definition. This step
+could halt the job, if a complete config definition is not found. We
+will leverage core.logic for this.
+5. Create the necessary pallet server and group specs.
+6. Launch the job using pallet.
+
+The config definition will be picked up during the :settings phase and
+used to generate the proper installers and configurers for each node.
