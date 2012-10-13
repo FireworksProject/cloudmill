@@ -116,7 +116,7 @@ For example:
  :configurer #cloudmill/stevedore (sed {"payment-provider-mock"
                                         "amazon-payments"
                                         "/path/to/config/file"})
- :depends #{:apache2 :mod_php :couchdb}}
+ :depends #{:apache2 :mod_wsgi :couchdb}}
  
 {:name :couchdb
  :provides :db
