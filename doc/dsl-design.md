@@ -114,8 +114,8 @@ For example:
  :provides :web-app
  :installer #cloudmill/github "https://github.com/foo/web-app.git"
  :configurer #cloudmill/stevedore (sed {"payment-provider-mock"
-                                        "amazon-payments"
-                                        "/path/to/config/file"})
+                                        "amazon-payments"}
+                                        "/path/to/config/file")
  :depends #{:apache2 :mod_wsgi :couchdb}}
  
 {:name :couchdb
