@@ -1,5 +1,5 @@
-Cluster Spec
-============
+# Cluster Spec
+==============
 
 This specifies the constraints the given cluster must satisfy.
 
@@ -77,3 +77,60 @@ Example:
 ```clojure
 {[:web-server :web-app :db] :medium, :monitoring :small}
 ```
+
+The above example specifies that the :web-server, :web-app, and :db
+are all to run on the same machine, while the :monitoring role is to
+live on its own machine. The two machines to be used are to have
+:medium and :small capabilities, respectively.
+
+These capabilities will be defined in detail by the hardware
+specification.
+
+# Service Spec
+==============
+
+A Service is a concrete software package that provides a given role.
+It is installing a Service on some Node that enables the Node to play
+a given Role in the cluster. For example, if a Node can play the
+:web-server role, if it has the :apache2 service installed on it.
+
+
+A Service spec must define multiple pieces of information:
+
+* name
+* provides
+* installer
+* configurer
+
+A Service may define:
+
+* depends
+
+For example:
+
+```clojure
+{:name :apache2
+ :provides :web-server
+ :installer #cloudmill/packager "apache"
+ :configurer #cloudmill/remote-file "http://foo.com/bar.sh"}
+ 
+{:name :customer-foo-web-app
+ :provides :web-app
+ :installer #cloudmill/github "https://github.com/foo/web-app.git"
+ :configurer #cloudmill/stevedore (sed {"payment-provider-mock"
+                                        "amazon-payments"})
+ :depends #{:apache2 :mod_php :couchdb}}
+ 
+{:name :couchdb
+ :provides :db
+ :installer #cloudmill/chef-solo "http://foo.com/path/to/recipe"
+ :configurer :installer ; configuration was provided by installer}
+ ```
+
+Cloudmill will provide various installers and configurers. This can be
+extended by third-parties as well.
+
+# Hardware Spec
+===============
+
+This is basically going to be a map that can be handed to pallet.core/node-spec.
