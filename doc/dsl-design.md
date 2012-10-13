@@ -61,7 +61,7 @@ Specifies names for the particular machines configurations to be used.
 
 Example:
 
-``clojure
+```clojure
 :large
 :medium
 :small
