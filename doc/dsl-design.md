@@ -1,5 +1,5 @@
 # Cluster Spec
---------------
+==============
 
 This specifies the constraints the given cluster must satisfy.
 
@@ -128,6 +128,6 @@ Cloudmill will provide various installers and configurers. This can be
 extended by third-parties as well.
 
 # Hardware Spec
----------------
+===============
 
 This is basically going to be a map that can be handed to pallet.core/node-spec.
