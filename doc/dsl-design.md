@@ -158,7 +158,7 @@ tearing down, or otherwise changing the configuration of a cluster.
 
 ### A Sketch of the algorithm
 
-1. Read the cluster spec
+1. Read the cluster spec and environment
 2. Verify Cloud Provider(s)
 3. Load configurers
 4. Query configurers and environment for config definition. This step
