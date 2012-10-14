@@ -108,14 +108,14 @@ For example:
 {:name :apache2
  :provides :web-server
  :installer #cloudmill/packager "apache" ; use apt-get or yum
- :configurer #cloudmill/remote-file "http://foo.com/bar.sh"}
+ :configurer #cloudmill/remote-config "http://foo.com/bar.clj"}
  
 {:name :customer-foo-web-app
  :provides :web-app
  :installer #cloudmill/github "https://github.com/foo/web-app.git"
- :configurer #cloudmill/stevedore (sed {"payment-provider-mock"
-                                        "amazon-payments"}
-                                        "/path/to/config/file")
+ :configurer #cloudmill/pallet.action (sed "/path/to/config/file"
+                                           {"payment-provider-mock"
+                                            "amazon-payments"})
  :depends #{:apache2 :mod_wsgi :couchdb}}
  
 {:name :couchdb
