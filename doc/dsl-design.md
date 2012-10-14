@@ -131,7 +131,16 @@ extended by third-parties as well.
 # Hardware Spec
 ===============
 
-This is basically going to be a map that can be handed to pallet.core/node-spec.
+This is basically going to be a map that maps from name to a map that
+can be handed to pallet.core/node-spec.
+
+For example:
+
+```clojure
+{:small {:image {:os-family :debian}
+         :network {:inbound-ports [5984]}
+         :hardware {:min-cores 1 :min-ram 600}}}
+```
 
 # Core Abstractions
 ===================
