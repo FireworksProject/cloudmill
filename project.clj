@@ -30,7 +30,8 @@
                      [org.cloudhoist/pallet-lein "0.5.2"]]
   :profiles {:dev
              {:dependencies
-              [[org.cloudhoist/pallet "0.7.2" :classifier "tests"]]
+              [[org.cloudhoist/pallet "0.7.2" :classifier "tests"]
+               [midje "1.4.0"]]
               :plugins [[org.cloudhoist/pallet-lein "0.5.2"]]}}
   :local-repo-classpath true
   :repositories
