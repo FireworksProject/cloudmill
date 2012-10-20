@@ -4,8 +4,10 @@
              compute
              [node :as n]]
             [conch.core :as sh]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [pallet.compute :as compute])
   (:use [pallet.configure :only [compute-service]]
+        [cloudmill.nodes :only [canonicalize-node]]
         [cloudmill.groups.couchdb :only [couchdb]]))
 
 (def bootstrap-sh (io/resource "bootstrap.sh"))
@@ -27,7 +29,7 @@
     (future (sh/stream-to proc :err (io/as-file (str logfile ".err.log"))))
 
     (fn []
-      (sh/exit-code (sh/destroy proc))
+      (doto proc sh/destroy sh/exit-code)
       (sh/exit-code (sh/proc "killall" "vboxwebsrv")))))
 
 (defn get-create-fn
@@ -46,33 +48,18 @@
          (get-destroy-fn group))
     (catch Exception _ false)))
 
-(defn canonicalize-node
-  [node]
-  (let [key-map {:group-name      n/group-name
-                 :hostname        n/hostname
-                 :64-bit?         n/is-64bit?
-                 :os-family       n/os-family
-                 :os-version      n/os-version
-                 :primary-ip      n/primary-ip
-                 :private-ip      n/private-ip
-                 :running?        n/running?
-                 :ssh-port        n/ssh-port}]
-    (reduce #(assoc %1 (key %2) ((val %2) node))
-            {}
-            key-map)))
-
 (defn create
   ([group-name]
      (create group-name (compute-service :virtualbox)))
-  ([group-name compute]
+  ([group-name compute-name]
      (if-let [create (get-create-fn group-name)]
-       (map canonicalize-node (:selected-nodes (@create compute)))
+       (map canonicalize-node (:selected-nodes (@create compute-name)))
        'fail)))
 
 (defn destroy
   ([group-name]
      (destroy group-name (compute-service :virtualbox)))
-  ([group-name compute]
+  ([group-name compute-name]
      (if-let [destroy (get-destroy-fn group-name)]
-       (map canonicalize-node (:selected-nodes (@destroy compute)))
+       (map canonicalize-node (:selected-nodes (@destroy compute-name)))
        'fail)))

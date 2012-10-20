@@ -9,3 +9,5 @@ pom.xml
 .lein-failures
 .lein-plugins
 logs
+/virtualbox.err.log
+/virtualbox.log
