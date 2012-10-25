@@ -1,5 +1,9 @@
 (ns cloudmill.readers)
 
-(defn pallet-crate
+(defn crate-installer
   [crate-symbol]
-  "foo")
+  "crate-installer")
+
+(defn crate-configurer
+  [sym]
+  "crate-configurer")
