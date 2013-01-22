@@ -51,5 +51,5 @@ fi
 ssh-add "$HOME/.ssh/id_rsa" || fail "Could not add ssh key to ssh-agent"
 
 
-VBoxManage setproperty websrvauthlibrary null || fail "Failure invoking: VBoxManage setproperty websrvauthlibrary null"
 vboxwebsrv -t0 || fail "Failure invoking: vboxwebsrv -t0"
+VBoxManage setproperty websrvauthlibrary null || fail "Failure invoking: VBoxManage setproperty websrvauthlibrary null"
