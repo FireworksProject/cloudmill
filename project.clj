@@ -1,9 +1,10 @@
 (defproject com.fireworksproject/cloudmill "0.1.0-SNAPSHOT"
   :description "FIXME Pallet project for cloudmill"
   :dependencies [[org.clojure/clojure "1.4.0"]
+                 [org.clojure/core.logic "0.7.5"]
                  [org.cloudhoist/pallet "0.7.2"]
                  [org.cloudhoist/pallet-jclouds "1.4.2"]
-                 [org.cloudhoist/pallet-vmfest "0.2.0"]
+                 [org.cloudhoist/pallet-vmfest "0.2.2"]
 
                  ;; To get started we include all jclouds compute providers.
                  ;; You may wish to replace this with the specific jclouds
@@ -20,7 +21,6 @@
 
                  ;; Interface
                  [conch "0.2.1"]
-
 
                  ;; Crates
                  [org.cloudhoist/git "0.7.0-beta.1"]]
