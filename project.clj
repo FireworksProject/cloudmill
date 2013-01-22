@@ -1,6 +1,6 @@
 (defproject com.fireworksproject/cloudmill "0.1.0-SNAPSHOT"
   :description "FIXME Pallet project for cloudmill"
-  :dependencies [[org.clojure/clojure "1.5.0-RC2"]
+  :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.cloudhoist/pallet "0.7.2"]
                  [org.cloudhoist/pallet-jclouds "1.4.2"]
                  [org.cloudhoist/pallet-vmfest "0.2.2"]
