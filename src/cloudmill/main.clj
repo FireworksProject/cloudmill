@@ -33,35 +33,3 @@
     (fn []
       (doto proc sh/destroy sh/exit-code)
       (sh/exit-code (sh/proc "killall" "vboxwebsrv")))))
-
-(defn get-create-fn
-  [group]
-  (ns-resolve group 'create))
-
-(defn get-destroy-fn
-  [group]
-  (ns-resolve group 'destroy))
-
-(defn valid-group?
-  [group]
-  (try
-    (require group)
-    (and (get-create-fn group)
-         (get-destroy-fn group))
-    (catch Exception _ false)))
-
-(defn create
-  ([group-name]
-     (create group-name (compute-service :virtualbox)))
-  ([group-name compute-name]
-     (if-let [create (get-create-fn group-name)]
-       (map canonicalize-node (:selected-nodes (@create compute-name)))
-       'fail)))
-
-(defn destroy
-  ([group-name]
-     (destroy group-name (compute-service :virtualbox)))
-  ([group-name compute-name]
-     (if-let [destroy (get-destroy-fn group-name)]
-       (map canonicalize-node (:selected-nodes (@destroy compute-name)))
-       'fail)))
