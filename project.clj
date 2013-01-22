@@ -35,5 +35,6 @@
   :repositories
   {"sonatype-snapshots" "https://oss.sonatype.org/content/repositories/snapshots"
    "sonatype" "https://oss.sonatype.org/content/repositories/releases/"}
-  :repl-options {:init (do (require 'cloudmill.repl)
-                           (cloudmill.repl/force-slf4j))})
+  ;; :repl-options {:init (do (require 'cloudmill.repl)
+  ;;                          (cloudmill.repl/force-slf4j))}
+  )
