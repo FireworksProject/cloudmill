@@ -1,7 +1,6 @@
 (defproject com.fireworksproject/cloudmill "0.1.0-SNAPSHOT"
   :description "FIXME Pallet project for cloudmill"
   :dependencies [[org.clojure/clojure "1.5.0-RC2"]
-                 [org.clojure/core.logic "0.7.5"]
                  [org.cloudhoist/pallet "0.7.2"]
                  [org.cloudhoist/pallet-jclouds "1.4.2"]
                  [org.cloudhoist/pallet-vmfest "0.2.2"]
@@ -30,8 +29,7 @@
                      [org.cloudhoist/pallet-lein "0.5.2"]]
   :profiles {:dev
              {:dependencies
-              [[org.cloudhoist/pallet "0.7.2" :classifier "tests"]
-               [midje "1.4.0"]]
+              [[org.cloudhoist/pallet "0.7.2" :classifier "tests"]]
               :plugins [[org.cloudhoist/pallet-lein "0.5.2"]]}}
   :local-repo-classpath true
   :repositories
