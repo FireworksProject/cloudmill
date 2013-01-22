@@ -1,35 +1,29 @@
 (ns cloudmill.main
-  (:require [pallet
-             core
-             compute
-             [node :as n]]
-            [conch.core :as sh]
-            [clojure.java.io :as io]
-            [pallet.compute :as compute]
-            [pallet.configure :refer [compute-service]]
+  (:require [cloudmill.bootstrap :refer [bootstrap]]))
 
-            cloudmill.repl))
 
-(def bootstrap-sh (io/resource "bootstrap.sh"))
-(def pallet-config (io/resource "pallet-config.clj"))
+(comment
+  (def vmfest (compute-service :virtualbox))
+  (use '[pallet.core :only [group-spec node-spec server-spec]]
+       '[pallet.phase :only [phase-fn]]
+       '[pallet.crate.automated-admin-user :only [automated-admin-user]]
+       '[pallet.action.exec-script :only [exec-script]]
+       '[pallet.session :only [nodes-in-group]])
+  (def base-server (server-spec :phases {:bootstrap (phase-fn (automated-admin-user))}))
+  (def debian-node (node-spec :image {:os-family :debian
+                                      :os-64-bit? true}))
+  (def debian-group (group-spec "debian-vms" :node-spec debian-node
+                                :extends [base-server]))
+  (pallet.core/converge {debian-group 1} :compute vmfest)
+  (pallet.core/converge {debian-group 0} :compute vmfest)
 
-(defn bootstrap
-  [logfile]
-  ;; Setup logging to work with pallet.
-  (cloudmill.repl/force-slf4j) 
-  (let [script (slurp bootstrap-sh)
-        proc (sh/proc "sh")
-        pallet-config-path (io/as-file (str (System/getenv "HOME") "/.pallet/config.clj"))]
+  (use 'vmfest.manager 'pallet.compute.vmfest)
 
-    (when-not  (.exists pallet-config-path)
-      (io/make-parents pallet-config-path)
-      (spit pallet-config-path (slurp pallet-config)))
-    
-    
-    (future (sh/feed-from-string proc script))
-    (future (sh/stream-to proc :out (io/as-file (str logfile ".log"))))
-    (future (sh/stream-to proc :err (io/as-file (str logfile ".err.log"))))
-
-    (fn []
-      (doto proc sh/destroy sh/exit-code)
-      (sh/exit-code (sh/proc "killall" "vboxwebsrv")))))
+  (def g (group-spec "xxx"
+                     :phases
+                     {:bootstrap (phase-fn (automated-admin-user))
+                      :configure (phase-fn 
+                                  (exec-script (echo "hello")))}
+                     :node-spec (node-spec :image {:os-family :debian})))
+  
+  )
