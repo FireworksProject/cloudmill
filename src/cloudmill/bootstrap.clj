@@ -23,7 +23,7 @@
   (let [script (slurp bootstrap-sh)
         proc (sh/proc "sh")
         pallet-config-path (io/as-file (str (System/getenv "HOME") "/.pallet/config.clj"))
-        add-image-job (future (add-image (compute-service :virtualbox) debian-vid-url))]
+        add-image-job (future (add-image (compute-service :virtualbox) debian-vdi-url))]
 
     (when-not  (.exists pallet-config-path)
       (io/make-parents pallet-config-path)
