@@ -1,9 +1,9 @@
 (defproject com.fireworksproject/cloudmill "0.1.0-SNAPSHOT"
   :description "FIXME Pallet project for cloudmill"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [org.cloudhoist/pallet "0.7.2"]
+                 [org.cloudhoist/pallet "0.8.0-alpha.8"]
                  [org.cloudhoist/pallet-jclouds "1.4.2"]
-                 [org.cloudhoist/pallet-vmfest "0.2.2"]
+                 [org.cloudhoist/pallet-vmfest "0.2.3"]
 
                  ;; To get started we include all jclouds compute providers.
                  ;; You may wish to replace this with the specific jclouds
@@ -24,14 +24,9 @@
                  ;; Crates
                  [org.cloudhoist/git "0.7.0-beta.1"]]
   
-  :dev-dependencies [[org.cloudhoist/pallet
-                      "0.7.2" :type "test-jar"]
-                     [org.cloudhoist/pallet-lein "0.5.2"]]
-  :profiles {:dev
-             {:dependencies
-              [[org.cloudhoist/pallet "0.7.2" :classifier "tests"]]
-              :plugins [[org.cloudhoist/pallet-lein "0.5.2"]]}}
   :local-repo-classpath true
+  :jvm-opts ["-Djava.awt.headless=true"]
+  :main cloudmill.main
   :repositories
   {"sonatype-snapshots" "https://oss.sonatype.org/content/repositories/snapshots"
    "sonatype" "https://oss.sonatype.org/content/repositories/releases/"}

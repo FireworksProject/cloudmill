@@ -1,20 +1,9 @@
 * Usage
 
-1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.1.x]]
+1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.2.x]]
 2. Install [[https://github.com/technomancy/leiningen][leiningen]]
-3. Startup the virtualbox webservice by invoking: 
 
-#+BEGIN_SRC sh
-  sh bootstrap.sh
-#+END_SRC
-
-4. Add the vmfest image. In a new terminal invoke:
-
-#+BEGIN_SRC sh
-  lein pallet add-image https://s3.amazonaws.com/vmfest-images/debian-6.0.2.1-64bit-v0.3.vdi.gz
-#+END_SRC
-
-5. To start a new VM and begin installing couchdb on it invoke:
+3. To start a new VM and begin installing couchdb on it invoke:
 
 #+BEGIN_SRC sh
   lein pallet -P virtualbox converge cloudmill.groups.couchdb/couchdb 1

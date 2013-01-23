@@ -1,5 +1,12 @@
 (ns cloudmill.main
-  (:require [cloudmill.bootstrap :refer [bootstrap]]))
+  (:require [cloudmill.dispatch :as dsp]
+            cloudmill.virtualbox)
+  (:gen-class))
+
+(defn -main
+  [command & args]
+  (dsp/dispatch command args)
+  (shutdown-agents))
 
 
 (comment
@@ -15,15 +22,4 @@
   (def debian-group (group-spec "debian-vms" :node-spec debian-node
                                 :extends [base-server]))
   (pallet.core/converge {debian-group 1} :compute vmfest)
-  (pallet.core/converge {debian-group 0} :compute vmfest)
-
-  (use 'vmfest.manager 'pallet.compute.vmfest)
-
-  (def g (group-spec "xxx"
-                     :phases
-                     {:bootstrap (phase-fn (automated-admin-user))
-                      :configure (phase-fn 
-                                  (exec-script (echo "hello")))}
-                     :node-spec (node-spec :image {:os-family :debian})))
-  
-  )
+  (pallet.core/converge {debian-group 0} :compute vmfest))
