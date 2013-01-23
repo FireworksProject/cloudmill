@@ -2,9 +2,6 @@
 
 cd `dirname $0`
 
-PALLET_CONF_FILE="$HOME/.pallet/config.clj"
-DEFAULT_PALLET_CONF="./resources/pallet-config.clj"
-
 fail () {
     echo "$@" >&2
     exit 1
@@ -31,11 +28,6 @@ ensure_available "lein"       "Ensure you have leiningen installed: https://gith
 ensure_available "vboxwebsrv" "Ensure you have installed VirtualBox"
 ensure_available "VBoxManage" "Ensure you have installed VirtualBox"
 
-if ! [ -f "$PALLET_CONF_FILE" ]; then
-    ensure_dir `dirname $PALLET_CONF_FILE`
-    cp $DEFAULT_PALLET_CONF $PALLET_CONF_FILE  || warn "Couldn't copy $DEFAULT_PALLET_CONF to $PALLET_CONF_FILE"
-fi
-
 # FIXME:
 # Currently pallet uses ssh-agent to discover which key to use for
 # shelling into the nodes it creates. You will not be able to shell in
@@ -51,5 +43,5 @@ fi
 ssh-add "$HOME/.ssh/id_rsa" || fail "Could not add ssh key to ssh-agent"
 
 
-vboxwebsrv -t0 || fail "Failure invoking: vboxwebsrv -t0"
 VBoxManage setproperty websrvauthlibrary null || fail "Failure invoking: VBoxManage setproperty websrvauthlibrary null"
+vboxwebsrv -t0 || fail "Failure invoking: vboxwebsrv -t0"
