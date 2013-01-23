@@ -24,7 +24,6 @@ ensure_available () {
     fi
 }
 
-ensure_available "lein"       "Ensure you have leiningen installed: https://github.com/technomancy/leiningen"
 ensure_available "vboxwebsrv" "Ensure you have installed VirtualBox"
 ensure_available "VBoxManage" "Ensure you have installed VirtualBox"
 
