@@ -19,8 +19,8 @@
 (defn add-image
   "Wrap pallet.compute.vmfest/add-image so it has nicer semantics.
 
-   Return true if image was successfully added (or was already added),
-   false otherwise."
+   Return true if image was successfully added (or has previously
+   been added), false otherwise."
   [image]
   (try (nil? (vmfest/add-image (compute-service :virtualbox) image))
        (catch clojure.lang.ExceptionInfo _
@@ -46,7 +46,6 @@
     (when-not  (.exists pallet-config-path)
       (io/make-parents pallet-config-path)
       (spit pallet-config-path (slurp pallet-config)))
-    
     
     (sh/feed-from-string proc script)
     (future (sh/stream-to proc :out (io/as-file (str logfile ".log"))))
