@@ -1,4 +1,4 @@
-(defproject com.fireworksproject/cloudmill "0.1.0-SNAPSHOT"
+(defproject com.fireworksproject/cloudmill "0.1.0"
   :description "FIXME Pallet project for cloudmill"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.cloudhoist/pallet "0.8.0-alpha.8"]
