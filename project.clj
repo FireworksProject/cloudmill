@@ -25,7 +25,8 @@
                  [org.cloudhoist/git "0.7.0-beta.1"]]
   
   :local-repo-classpath true
-  :jvm-opts ["-Djava.awt.headless=true" "-Dlogback.configurationFile=resource:/logback.xml"]
+  :jvm-opts ["-Djava.awt.headless=true" "-Dlogback.configurationFile=resources/logback.xml"]
+  :uberjar-name "cloudmill.jar"
   :main cloudmill.main
   :repositories
   {"sonatype-snapshots" "https://oss.sonatype.org/content/repositories/snapshots"
