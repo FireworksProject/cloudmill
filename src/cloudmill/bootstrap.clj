@@ -8,6 +8,7 @@
             [pallet.compute :as compute]
             [pallet.configure :refer [compute-service]]
             [pallet.compute.vmfest :as vmfest]
+            [clojure.tools.logging :as l]
 
             cloudmill.repl))
 
@@ -38,7 +39,9 @@
 (defn bootstrap
   [logfile]
   ;; Setup logging to work with pallet.
+  (l/log-capture! 'vmfest.virtualbox.image)
   (cloudmill.repl/force-slf4j)
+  
   (let [script (slurp bootstrap-sh)
         proc (sh/proc "sh")
         pallet-config-path (io/as-file (str (System/getenv "HOME") "/.pallet/config.clj"))]
