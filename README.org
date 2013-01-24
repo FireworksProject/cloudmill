@@ -3,16 +3,16 @@
 1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.2.x]]
 2. Install [[https://github.com/technomancy/leiningen][leiningen]]
 
-3. To start a new VM and begin installing couchdb on it invoke:
+3. To start a new virtualbox VM 
 
 #+BEGIN_SRC sh
-  lein pallet -P virtualbox converge cloudmill.groups.couchdb/couchdb 1
+  lein run vbox start
 #+END_SRC
 
 6. To destroy the VM invoke:
 
 #+BEGIN_SRC sh
-  lein pallet -P virtualbox converge cloudmill.groups.couchdb/couchdb 0
+  lein run vbox stop
 #+END_SRC
 
 NOTE: I will make the command-line interface for cloudmill easier to
