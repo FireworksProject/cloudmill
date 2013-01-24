@@ -6,8 +6,8 @@
 (defn -main
   [command & args]
   (dsp/dispatch command args)
-  (shutdown-agents))
-
+  (shutdown-agents)
+  (System/exit 0))
 
 (comment
   (def vmfest (compute-service :virtualbox))

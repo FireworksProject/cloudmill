@@ -40,6 +40,8 @@ Understood operations are:
   stop"
   [command & args]
   (let [stop-vboxweb (bootstrap "logs/vboxweb")]
+    (-> (Runtime/getRuntime) (.addShutdownHook (Thread. stop-vboxweb)))
+    
     (case command
       "start" (output-results (start-vm))
       "stop"  (stop-vm))))
