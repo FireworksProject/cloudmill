@@ -1,22 +1,43 @@
+* Building
+
+1. Install java
+2. Install [[https://github.com/technomancy/leiningen][leiningen]]
+3. Clone this repository
+4. Create an executable jar file by invoking:
+
+#+BEGIN_SRC sh
+  cd /path/to/repo
+  lein uberjar
+#+END_SRC
+
+The executable jar file is in /path/to/project/target/cloudmill.jar
+
 * Usage
 
-1. Install [[https://www.virtualbox.org/wiki/Downloads][VirtualBox 4.2.x]]
-2. Install [[https://github.com/technomancy/leiningen][leiningen]]
+If you want to use cloudmill with Virtualbox, ensure you have
+[[https://www.virtualbox.org/wiki/Downloads][Virtualbox v4.2.x]] installed.
 
-3. To start a new virtualbox VM 
+Further, ensure you have an ssh key registered with your ssh-agent. If
+you do not, cloudmill will not be able to log into and configure your
+VMs.
 
-#+BEGIN_SRC sh
-  lein run vbox start
-#+END_SRC
-
-6. To destroy the VM invoke:
+Invoke cloudmill by:
 
 #+BEGIN_SRC sh
-  lein run vbox stop
+  java -jar cloudmill.jar help
 #+END_SRC
 
-NOTE: I will make the command-line interface for cloudmill easier to
-use in the future
+To start a virtualbox VM:
+
+#+BEGIN_SRC sh
+  java -jar cloudmill.jar vbox start
+#+END_SRC
+
+To stop your virtualbox VMs:
+
+#+BEGIN_SRC sh
+  java -jar cloudmill.jar vbox stop
+#+END_SRC
 
 * Caveats
 
