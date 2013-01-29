@@ -39,6 +39,18 @@ To stop your virtualbox VMs:
   java -jar cloudmill.jar vbox stop
 #+END_SRC
 
+* Configuration
+
+By default, Cloudmill will store it's configuration information in
+"~/.cloudmill/config.clj". You can modify this location by setting
+your CLOUDMILL_HOME.
+
+For example:
+
+#+BEGIN_SRC sh
+  export CLOUDMILL_HOME=/path/to/cloudmill/config.clj
+#+END_SRC
+
 * Caveats
 
 ** Linux Distribution
