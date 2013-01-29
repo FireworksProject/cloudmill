@@ -1,6 +1,7 @@
 (ns cloudmill.main
   (:require [cloudmill.dispatch :as dsp]
-            cloudmill.virtualbox)
+            cloudmill.virtualbox
+            cloudmill.aws)
   (:gen-class))
 
 (defn -main
