@@ -1,4 +1,4 @@
-(defproject com.fireworksproject/cloudmill "0.1.0"
+(defproject com.fireworksproject/cloudmill "0.1.1-SNAPSHOT"
   :description "FIXME Pallet project for cloudmill"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.cloudhoist/pallet "0.8.0-alpha.8"]
@@ -17,12 +17,9 @@
 
                  [org.jclouds.driver/jclouds-sshj "1.4.2"]
                  [ch.qos.logback/logback-classic "1.0.0"]
-                 
-                 ;; Interface
-                 [conch "0.2.1"]
 
-                 ;; Crates
-                 [org.cloudhoist/git "0.7.0-beta.1"]]
+                 ;; Interface
+                 [conch "0.2.1"]]
   
   :local-repo-classpath true
   :jvm-opts ["-Djava.awt.headless=true" "-Dlogback.configurationFile=resources/logback.xml"]
