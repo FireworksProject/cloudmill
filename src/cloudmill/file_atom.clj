@@ -104,9 +104,10 @@
   (let [file (io/file filename)
         path (.getAbsolutePath file)
         options (apply hash-map options)]
+    (io/make-parents filename)
     (DurableAtom.
      (:meta options)
-     (:validator options)
-     (:watches options)
+     (atom (:validator options))
+     (atom (:watches options))
      (file-store file)
      (AtomicReference. (if (.exists file) (or (read-form file) init) init)))))
