@@ -107,6 +107,6 @@
     (DurableAtom.
      (:meta options)
      (:validator options)
-     (:watchest options)
+     (:watches options)
      (file-store file)
      (AtomicReference. (if (.exists file) (or (read-form file) init) init)))))
