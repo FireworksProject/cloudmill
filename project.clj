@@ -2,20 +2,20 @@
   :description "FIXME Pallet project for cloudmill"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.cloudhoist/pallet "0.8.0-alpha.8"]
-                 [org.cloudhoist/pallet-jclouds "1.4.2"]
-                 [org.cloudhoist/pallet-vmfest "0.2.3"]
+                 [org.cloudhoist/pallet-jclouds "1.5.1"]
+                 [org.cloudhoist/pallet-vmfest "0.2.4"]
 
                  ;; To get started we include all jclouds compute providers.
                  ;; You may wish to replace this with the specific jclouds
                  ;; providers you use, to reduce dependency sizes.
-                 [org.jclouds/jclouds-allblobstore "1.4.2"]
-                 [org.jclouds/jclouds-allcompute "1.4.2"]
-                 [org.jclouds.driver/jclouds-slf4j "1.4.2"
+                 [org.jclouds/jclouds-allblobstore "1.5.2"]
+                 [org.jclouds/jclouds-allcompute "1.5.2"]
+                 [org.jclouds.driver/jclouds-slf4j "1.5.2"
                   ;; the declared version is old and can overrule the
                   ;; resolved version
                   :exclusions [org.slf4j/slf4j-api]]
 
-                 [org.jclouds.driver/jclouds-sshj "1.4.2"]
+                 [org.jclouds.driver/jclouds-sshj "1.5.2"]
                  [ch.qos.logback/logback-classic "1.0.0"]
 
                  ;; Interface
