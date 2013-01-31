@@ -14,7 +14,12 @@
                                     "debian-vm"
                                     :phases {:bootstrap (plan-fn (automated-admin-user))}
                                     :node-spec (node-spec :image {:os-family :debian}))
-                       :image-url "https://s3.amazonaws.com/vmfest-images/debian-6.0.2.1-64bit-v0.3.vdi.gz"}})
+                       :image-url "https://s3.amazonaws.com/vmfest-images/debian-6.0.2.1-64bit-v0.3.vdi.gz"}
+             "ubuntu" {:group-spec (group-spec
+                                    "ubuntu-vm"
+                                    :phases {:bootstrap (plan-fn (automated-admin-user))}
+                                    :node-spec (node-spec :image {:os-family :ubuntu}))
+                       :image-url "https://s3.amazonaws.com/vmfest-images/ubuntu+12.04.vdi.gz"}})
 
 (defn add-image
   "Wrap pallet.compute.vmfest/add-image so it has nicer semantics.
@@ -56,7 +61,7 @@
   [name & args]
   (let [group (get-in groups [name :group-spec])]
     (ensure-image (:image group) (get-in groups [name :image-url]))
-    (println "starting vm...")
+    (println (format "starting %s vm..." name))
     (-> @(converge {group 1} :compute (compute-service :virtualbox))
         :new-nodes
         first
@@ -64,7 +69,7 @@
 
 (defn stop-vm
   [name & args]
-  (println "stopping vm...")
+  (println (format "stopping %s vm..." name))
   @(converge {(get-in groups [name :group-spec]) 0} :compute (compute-service :virtualbox))
   (println "done."))
 
@@ -77,14 +82,16 @@
   "Start and stop one-off virtual machines.
 
 Understood operations are:
-  start
-  stop"
+  list
+  start [os name]
+  stop [os name]"
   [command & [name args]]
   (let [stop-vboxweb (bootstrap "logs/vboxweb")
-        name (or name "debian")]
+        name (or name "ubuntu")]
     (-> (Runtime/getRuntime) (.addShutdownHook (Thread. stop-vboxweb)))
     
     (case command
+      "list"  (do (println "Known OS images:") (dorun (map #(println "  " %) (keys groups))))
       "start" (output-results (start-vm name))
       "stop"  (stop-vm name))))
 
