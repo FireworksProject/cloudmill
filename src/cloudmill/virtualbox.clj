@@ -1,6 +1,7 @@
 (ns cloudmill.virtualbox
   (:require [cloudmill.dispatch :as dsp]
             [cloudmill.bootstrap :refer [bootstrap]]
+            [cloudmill.configuration :as cfg]
 
             [pallet.core :refer [group-spec node-spec converge]]
             [pallet.api :refer [plan-fn]]
@@ -86,12 +87,13 @@ Understood operations are:
   start [os name]
   stop [os name]"
   [command & [name args]]
-  (let [stop-vboxweb (bootstrap "logs/vboxweb")
+  (let [logdir (:logdir @cfg/config cfg/default-logdir)
+        stop-vboxweb (bootstrap (str logdir "/vboxweb"))
         name (or name "ubuntu")]
     (-> (Runtime/getRuntime) (.addShutdownHook (Thread. stop-vboxweb)))
     
     (case command
-      "list"  (do (println "Known OS images:") (dorun (map #(println "  " %) (keys groups))))
+      "list"  (do (println "Known OS images:") (doseq [grp (keys groups)] (println "  " grp)))
       "start" (output-results (start-vm name))
       "stop"  (stop-vm name))))
 

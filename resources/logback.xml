@@ -9,7 +9,7 @@
   </appender>
 
   <appender name="COMPUTEFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>logs/jclouds-compute.log</file>
+    <file>${log-dir}/jclouds-compute.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/old/jclouds-compute.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>3</maxHistory>
@@ -20,7 +20,7 @@
   </appender>
 
   <appender name="WIREFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>logs/jclouds-wire.log</file>
+    <file>${log-dir}/jclouds-wire.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/old/jclouds-wire.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>3</maxHistory>
@@ -31,7 +31,7 @@
   </appender>
 
   <appender name="PALLETFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>logs/pallet.log</file>
+    <file>${log-dir}/pallet.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/old/pallet.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>3</maxHistory>
@@ -42,7 +42,7 @@
   </appender>
 
   <appender name="VMFESTFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>logs/vmfest.log</file>
+    <file>${log-dir}/vmfest.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/old/vmfest.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>3</maxHistory>

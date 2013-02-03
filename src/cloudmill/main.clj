@@ -1,11 +1,14 @@
 (ns cloudmill.main
   (:require [cloudmill.dispatch :as dsp]
             cloudmill.virtualbox
-            cloudmill.aws)
+            cloudmill.aws
+            [cloudmill.configuration :refer [setup-logging] :as cfg]
+            [clojure.java.io :as io])
   (:gen-class))
 
 (defn -main
   [command & args]
+  (setup-logging (:logdir @gcfg/config cfg/default-logdir) (io/resource "logback.xml"))
   (dsp/dispatch command args)
   (shutdown-agents)
   (System/exit 0))
