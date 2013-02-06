@@ -93,7 +93,7 @@ Understood operations are:
     (-> (Runtime/getRuntime) (.addShutdownHook (Thread. stop-vboxweb)))
     
     (case command
-      "list"  (do (println "Known OS images:") (doseq [grp (keys groups)] (println "  " grp)))
+      "list"  (do (println "Available OS images:") (doseq [grp (keys groups)] (println "  " grp)))
       "start" (output-results (start-vm name))
       "stop"  (stop-vm name))))
 
